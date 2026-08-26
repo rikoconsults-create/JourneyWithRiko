@@ -19,6 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  document.querySelectorAll('.help-links-toggle').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      var target = document.getElementById(button.dataset.target);
+
+      if (!target) return;
+
+      var isOpen = !target.hidden;
+
+      target.hidden = isOpen;
+      button.setAttribute('aria-expanded', String(!isOpen));
+      button.textContent = isOpen ? 'Not working?' : 'Hide links';
+    });
+  });
+
   // Reveal sections as they enter the viewport.
   // Content will still work if IntersectionObserver isn't supported.
   var sections = document.querySelectorAll(
